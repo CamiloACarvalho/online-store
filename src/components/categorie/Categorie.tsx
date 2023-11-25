@@ -10,7 +10,7 @@ function Categorie() {
         const result = await getCategories();
         setCategories(result);
       } catch (error) {
-        console.error('Erro ao obter categorias:', error);
+        console.error('Erro ao carregar a API', error);
       }
     };
 
