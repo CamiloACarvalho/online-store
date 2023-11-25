@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Categorie from '../categorie/Categorie';
 
 function Home() {
   const [search, setSearch] = useState('');
@@ -25,6 +26,7 @@ function Home() {
       >
         Ir para carrinho de compras
       </Link>
+      <Categorie />
     </>
   );
 }
