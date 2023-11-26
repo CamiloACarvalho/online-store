@@ -46,24 +46,24 @@ function Home() {
           </h2>
         )}
         {products.map((product: any) => (
-          <Link
-            key={ product.id }
-            data-testid="product-detail-link"
-            to={ `/ProductDetails/${product.id}` }
-          >
-            <div>
-              <h2 data-testid="product">{ product.title }</h2>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <h3>
-                {' '}
-                R$
-                {' '}
-                {product.price.toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                })}
-              </h3>
-            </div>
-          </Link>
+          <div key={ product.id }>
+            <h2 data-testid="product">{ product.title }</h2>
+            <img src={ product.thumbnail } alt={ product.title } />
+            <h3>
+              {' '}
+              R$
+              {' '}
+              {product.price.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+              })}
+            </h3>
+            <Link
+              data-testid="product-detail-link"
+              to={ `/ProductDetails/${product.id}` }
+            >
+              Detalhes do produto
+            </Link>
+          </div>
         ))}
       </div>
       <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
