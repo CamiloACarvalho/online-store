@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getProductById } from '../../services/api';
 
 type Product = {
@@ -15,7 +15,6 @@ type Product = {
 
 function ProductDetails() {
   const { idApi } = useParams<{ idApi: string }>();
-  const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -36,10 +35,6 @@ function ProductDetails() {
     fetchProductDetails();
   }, [idApi]);
 
-  const addToCart = () => {
-    setAddedToCart(true);
-  };
-
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -56,22 +51,12 @@ function ProductDetails() {
         alt={ product.title }
         data-testid="product-detail-image"
       />
-      <p>
-        {' '}
-        R$
-        {' '}
-        {product.price.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-        })}
+      <p data-testid="product-detail-price">
+        { product.price }
       </p>
-      <button onClick={ addToCart } data-testid="shopping-cart-button">
-        Adicionar ao Carrinho
-      </button>
-      {addedToCart && (
-        <p data-testid="shopping-cart-empty-message">
-          Produto adicionado ao carrinho!
-        </p>
-      )}
+      <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
+        Ir para carrinho de compras
+      </Link>
     </div>
   );
 }
