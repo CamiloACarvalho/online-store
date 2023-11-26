@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getCategories } from '../../services/api';
 
-function Categorie() {
+interface CategoryProps {
+  onSelectCategory: (category: string) => void;
+}
+
+function Category({ onSelectCategory }: CategoryProps) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -10,12 +14,16 @@ function Categorie() {
         const result = await getCategories();
         setCategories(result);
       } catch (error) {
-        console.error('Erro ao carregar a API', error);
+        console.error('Erro ao obter categorias:', error);
       }
     };
 
     fetchCategories();
   }, []);
+
+  const handleSelect = (category: string) => {
+    onSelectCategory(category);
+  };
 
   return (
     <section>
@@ -30,7 +38,9 @@ function Categorie() {
                 id={ `category${index}` }
                 data-testid="category"
                 type="radio"
+                name="selected"
                 value={ category }
+                onClick={ () => handleSelect(category.name) }
               />
               { category.name }
             </label>
@@ -41,4 +51,4 @@ function Categorie() {
   );
 }
 
-export default Categorie;
+export default Category;

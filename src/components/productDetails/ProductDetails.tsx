@@ -5,7 +5,7 @@ import { getProductById } from '../../services/api';
 function ProductDetails() {
   const { idApi } = useParams<{ idApi: string }>();
   const [addedToCart, setAddedToCart] = useState(false);
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const allProductDetails = async () => {
