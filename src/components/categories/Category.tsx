@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getCategories } from '../../services/api';
 
-interface CategorieProps {
+interface CategoryProps {
   onSelectCategory: (category: string) => void;
 }
 
-function Categorie({ onSelectCategory }: CategorieProps) {
+function Category({ onSelectCategory }: CategoryProps) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -21,8 +21,7 @@ function Categorie({ onSelectCategory }: CategorieProps) {
     fetchCategories();
   }, []);
 
-  const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const category = event.target.value;
+  const handleSelect = (category: string) => {
     onSelectCategory(category);
   };
 
@@ -39,8 +38,9 @@ function Categorie({ onSelectCategory }: CategorieProps) {
                 id={ `category${index}` }
                 data-testid="category"
                 type="radio"
+                name="selected"
                 value={ category }
-                onChange={ handleSelect }
+                onClick={ () => handleSelect(category.name) }
               />
               { category.name }
             </label>
@@ -51,4 +51,4 @@ function Categorie({ onSelectCategory }: CategorieProps) {
   );
 }
 
-export default Categorie;
+export default Category;

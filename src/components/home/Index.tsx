@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Categorie from '../categories/categories';
+import Category from '../categories/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 
 function Home() {
@@ -67,7 +67,7 @@ function Home() {
       >
         Ir para carrinho de compras
       </Link>
-      <Categorie onSelectCategory={ handleCategorySelect } />
+      <Category onSelectCategory={ handleCategorySelect } />
     </>
   );
 }
