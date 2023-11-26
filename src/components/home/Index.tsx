@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Categorie from '../categorie/Categorie';
+import ProductDetails from '../productDetails/productDetails';
 
 function Home() {
   const [search, setSearch] = useState('');
