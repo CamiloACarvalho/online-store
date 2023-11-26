@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getCategories } from '../../services/api';
 
-function Categorie() {
+interface CategorieProps {
+  onSelectCategory: (category: string) => void;
+}
+
+function Categorie({ onSelectCategory }: CategorieProps) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -17,6 +21,11 @@ function Categorie() {
     fetchCategories();
   }, []);
 
+  const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const category = event.target.value;
+    onSelectCategory(category);
+  };
+
   return (
     <section>
       <h2> Categorias </h2>
@@ -31,6 +40,7 @@ function Categorie() {
                 data-testid="category"
                 type="radio"
                 value={ category }
+                onChange={ handleSelect }
               />
               { category.name }
             </label>
