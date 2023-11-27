@@ -17,6 +17,7 @@ function ProductDetails() {
   const { idApi } = useParams<{ idApi: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const [cart, setCart] = useState<any>([]);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -43,6 +44,20 @@ function ProductDetails() {
     return <p>Produto não encontrado.</p>;
   }
 
+  const handleAddToCart = (elment: any) => {
+    const addTocart = cart.find((item: any) => item.id === elment.id);
+    if (addTocart) {
+      const verifyCart = cart.map((item: any) => (item.id === elment.id
+        ? { ...item, quantity: item.quantity + 1 } : item));
+      setCart(verifyCart);
+      localStorage.setItem('cart', JSON.stringify(verifyCart));
+    } else {
+      const newCart = [...cart, { ...elment, quantity: 1 }];
+      setCart(newCart);
+      localStorage.setItem('cart', JSON.stringify(newCart));
+    }
+  };
+
   return (
     <div>
       <h1 data-testid="product-detail-name">{ product.title }</h1>
@@ -52,8 +67,15 @@ function ProductDetails() {
         data-testid="product-detail-image"
       />
       <p data-testid="product-detail-price">
-        { product.price }
+        {product.price}
       </p>
+      <button
+        onClick={ () => handleAddToCart(product) }
+        type="button"
+        data-testid="product-detail-add-to-cart"
+      >
+        Adicionar ao Carrinho
+      </button>
       <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
         Ir para carrinho de compras
       </Link>
