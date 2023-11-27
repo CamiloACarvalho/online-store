@@ -7,6 +7,17 @@ function Home() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState<any>([]);
+
+  const handleAddToCart = (product: any) => {
+    const addTocart = cart.find((item: any) => item.id === product.id);
+    if (addTocart) {
+      const verifyCart = cart.map((item: any) => (item.id === product.id
+        ? { ...item, quantity: item.quantity + 1 } : item));
+      setCart(verifyCart);
+      localStorage.setItem('cart', JSON.stringify(verifyCart));
+    }
+  };
 
   const getValueInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const valueInput = event.target.value;
@@ -47,7 +58,7 @@ function Home() {
         )}
         {products.map((product: any) => (
           <div key={ product.id }>
-            <h2 data-testid="product">{ product.title }</h2>
+            <h2 data-testid="product">{product.title}</h2>
             <img src={ product.thumbnail } alt={ product.title } />
             <h3>
               {' '}
@@ -57,6 +68,13 @@ function Home() {
                 minimumFractionDigits: 2,
               })}
             </h3>
+            <button
+              onClick={ () => handleAddToCart(product) }
+              type="button"
+              data-testid="product-add-to-cart"
+            >
+              Adicionar ao Carrinho
+            </button>
             <Link
               data-testid="product-detail-link"
               to={ `/ProductDetails/${product.id}` }

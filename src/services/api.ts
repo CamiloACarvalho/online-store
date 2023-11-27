@@ -10,7 +10,7 @@ export async function getProductsFromCategoryAndQuery(categoryId: any, query: an
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
   const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
 
   return data;
 }
@@ -29,5 +29,6 @@ type Product = {
 export async function getProductById(productId: string): Promise<Product> {
   const response = await fetch(`https://api.mercadolibre.com/items/${productId}`);
   const product = await response.json();
+  console.log(product);
   return product;
 }
