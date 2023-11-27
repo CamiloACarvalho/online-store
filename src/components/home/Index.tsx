@@ -5,7 +5,6 @@ import { getProductsFromCategoryAndQuery } from '../../services/api';
 
 function Home() {
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState<any>([]);
 
@@ -29,18 +28,9 @@ function Home() {
   };
 
   const handleClick = async () => {
-    const response = await getProductsFromCategoryAndQuery(
-      selectedCategory,
-      search,
-    );
+    const response = await getProductsFromCategoryAndQuery('', search);
     setProducts(response.results);
     setSearch('');
-  };
-
-  const handleCategorySelect = async (category: string) => {
-    setSelectedCategory(category);
-    const response = await getProductsFromCategoryAndQuery(category, '');
-    setProducts(response.results);
   };
 
   return (
@@ -91,7 +81,7 @@ function Home() {
       <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
         Ir para carrinho de compras
       </Link>
-      <Category onSelectCategory={ handleCategorySelect } />
+      <Category />
     </>
   );
 }

@@ -1,12 +1,11 @@
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getCategories } from '../../services/api';
 
-interface CategoryProps {
-  onSelectCategory: (category: string) => void;
-}
-
-function Category({ onSelectCategory }: CategoryProps) {
+function Category() {
   const [categories, setCategories] = useState([]);
+  const [findProductsByCategory, setfindProductsByCategory] = useState([]);
+  const [cart, setCart] = useState<any>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -21,33 +20,79 @@ function Category({ onSelectCategory }: CategoryProps) {
     fetchCategories();
   }, []);
 
-  const handleSelect = (category: string) => {
-    onSelectCategory(category);
+  const handleCategorySelect = async (categoryID: string) => {
+    const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryID}`);
+    const data = await response.json();
+    setfindProductsByCategory(data.results);
+  };
+
+  const handleAddToCart = (product: any) => {
+    const addTocart = cart.find((item: any) => item.id === product.id);
+    if (addTocart) {
+      const verifyCart = cart.map((item: any) => (item.id === product.id
+        ? { ...item, quantity: item.quantity + 1 } : item));
+      setCart(verifyCart);
+      localStorage.setItem('cart', JSON.stringify(verifyCart));
+    } else {
+      const newCart = [...cart, { ...product, quantity: 1 }];
+      setCart(newCart);
+      localStorage.setItem('cart', JSON.stringify(newCart));
+    }
   };
 
   return (
-    <section>
-      <h2> Categorias </h2>
-      <ul>
-        {categories.map((category:any, index) => (
-          <li
-            key={ index }
+    <>
+      <section>
+        <h2> Categorias </h2>
+        <ul>
+          {categories.map((category:any, index) => (
+            <li
+              key={ index }
+            >
+              <label htmlFor={ `category${index}` }>
+                <input
+                  id={ `category${index}` }
+                  data-testid="category"
+                  type="radio"
+                  name="selected"
+                  value={ category }
+                  onClick={ () => handleCategorySelect(category.id) }
+                />
+                { category.name }
+              </label>
+            </li>
+          ))}
+        </ul>
+      </section>
+      {findProductsByCategory.map((element: any) => (
+        <div key={ element.id }>
+          <h2 data-testid="product">{element.title}</h2>
+          <img src={ element.thumbnail } alt={ element.title } />
+          <h3>
+            {' '}
+            R$
+            {' '}
+            {element.price.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+            })}
+          </h3>
+          <button
+            onClick={ () => handleAddToCart(element) }
+            type="button"
+            data-testid="product-add-to-cart"
           >
-            <label htmlFor={ `category${index}` }>
-              <input
-                id={ `category${index}` }
-                data-testid="category"
-                type="radio"
-                name="selected"
-                value={ category }
-                onClick={ () => handleSelect(category.name) }
-              />
-              { category.name }
-            </label>
-          </li>
-        ))}
-      </ul>
-    </section>
+            Adicionar ao Carrinho
+          </button>
+          <Link
+            data-testid="product-detail-link"
+            to={ `/ProductDetails/${element.id}` }
+          >
+            Detalhes do produto
+          </Link>
+        </div>
+      ))}
+      <section />
+    </>
   );
 }
 
