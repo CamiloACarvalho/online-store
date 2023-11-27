@@ -22,7 +22,12 @@ function ShoppingBasket() {
             <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
             <img src={ product.thumbnail } alt={ product.title } />
             <h3>
-              {product.price}
+              {' '}
+              R$
+              {' '}
+              {product.price.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+              })}
             </h3>
           </div>
 
