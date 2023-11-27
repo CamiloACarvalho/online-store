@@ -16,6 +16,10 @@ function Home() {
         ? { ...item, quantity: item.quantity + 1 } : item));
       setCart(verifyCart);
       localStorage.setItem('cart', JSON.stringify(verifyCart));
+    } else {
+      const newCart = [...cart, { ...product, quantity: 1 }];
+      setCart(newCart);
+      localStorage.setItem('cart', JSON.stringify(newCart));
     }
   };
 
