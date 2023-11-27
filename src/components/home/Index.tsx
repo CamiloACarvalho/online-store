@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Category from '../categories/Category';
+import Category from '../category/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 
 function Home() {
@@ -14,7 +14,10 @@ function Home() {
   };
 
   const handleClick = async () => {
-    const response = await getProductsFromCategoryAndQuery(selectedCategory, search);
+    const response = await getProductsFromCategoryAndQuery(
+      selectedCategory,
+      search,
+    );
     setProducts(response.results);
     setSearch('');
   };
@@ -34,11 +37,7 @@ function Home() {
           value={ search }
           onChange={ getValueInput }
         />
-        <button
-          type="button"
-          onClick={ handleClick }
-          data-testid="query-button"
-        >
+        <button type="button" onClick={ handleClick } data-testid="query-button">
           Buscar
         </button>
         {search === '' && (
@@ -48,23 +47,26 @@ function Home() {
         )}
         {products.map((product: any) => (
           <div key={ product.id }>
-            <h2 data-testid="product">
-              {product.title}
-            </h2>
+            <h2 data-testid="product">{ product.title }</h2>
             <img src={ product.thumbnail } alt={ product.title } />
             <h3>
               {' '}
               R$
               {' '}
-              {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+              {product.price.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+              })}
             </h3>
+            <Link
+              data-testid="product-detail-link"
+              to={ `/ProductDetails/${product.id}` }
+            >
+              Detalhes do produto
+            </Link>
           </div>
         ))}
       </div>
-      <Link
-        data-testid="shopping-cart-button"
-        to="/ShoppingBasket"
-      >
+      <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
         Ir para carrinho de compras
       </Link>
       <Category onSelectCategory={ handleCategorySelect } />
