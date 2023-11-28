@@ -79,7 +79,7 @@ function Home() {
         ))}
       </div>
       <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
-        Ir para carrinho de compras
+        <button> Ir para carrinho de compras</button>
       </Link>
       <Category />
     </>
