@@ -2,12 +2,20 @@ import { useEffect, useState } from 'react';
 
 function ShoppingBasket() {
   const [cart, setCart] = useState([]);
+  const [removeItem, setRemoveItem] = useState();
+
   useEffect(() => {
     const getCart = JSON.parse(localStorage.getItem('cart') || '[]');
     console.log(getCart);
     setCart(getCart);
   }, []);
   console.log(cart);
+
+  const handleRemove = (productId) => {
+    const updatedCart = cart.filter(product => product.id !== productId);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
 
   return (
     <div>
@@ -17,9 +25,10 @@ function ShoppingBasket() {
       ) : (
         cart.map((product: any) => (
           <div key={ product.id }>
-
-            <h2 data-testid="shopping-cart-product-name">{ product.title }</h2>
-            <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
+            <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
+            <p data-testid="shopping-cart-product-quantity">
+              {product.quantity}
+            </p>
             <img src={ product.thumbnail } alt={ product.title } />
             <h3>
               {' '}
@@ -29,8 +38,14 @@ function ShoppingBasket() {
                 minimumFractionDigits: 2,
               })}
             </h3>
+            <button
+              type="reset"
+              data-testid="remove-product"
+              onClick={ () => handleRemove(product.id) }
+            >
+              Remover Item
+            </button>
           </div>
-
         ))
       )}
     </div>
