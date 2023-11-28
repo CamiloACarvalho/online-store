@@ -1,20 +1,46 @@
 import { useEffect, useState } from 'react';
 
+type Product = {
+  id: string;
+  title: string;
+  price: number;
+  thumbnail: string;
+};
+type CartProducts = Product & {
+  quantity: number;
+};
+
 function ShoppingBasket() {
   const [cart, setCart] = useState([]);
-  const [removeItem, setRemoveItem] = useState();
 
   useEffect(() => {
     const getCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    console.log(getCart);
     setCart(getCart);
   }, []);
-  console.log(cart);
 
-  const handleRemove = (productId) => {
-    const updatedCart = cart.filter(product => product.id !== productId);
+  const handleRemove = (productId: Product) => {
+    const updatedCart = cart.filter((element: any) => element.id !== productId);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const handleIncrease = (productId: string) => {
+    const addItem = cart.map((item: any) => (item.id === productId
+      ? { ...item, quantity: item.quantity + 1 }
+      : item
+    ));
+    setCart(addItem);
+    localStorage.setItem('cart', JSON.stringify(addItem));
+  };
+
+  const handleDecrease = (productId: Product) => {
+    const removeItem = cart.map((item: any) => (
+      item.id === productId && item.quantity > 1
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    ));
+    setCart(removeItem);
+    localStorage.setItem('cart', JSON.stringify(removeItem));
   };
 
   return (
@@ -26,8 +52,22 @@ function ShoppingBasket() {
         cart.map((product: any) => (
           <div key={ product.id }>
             <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
-            <p data-testid="shopping-cart-product-quantity">
+            <p
+              data-testid="shopping-cart-product-quantity"
+            >
+              <button
+                data-testid="product-decrease-quantity"
+                onClick={ () => handleDecrease(product.id) }
+              >
+                ➖
+              </button>
               {product.quantity}
+              <button
+                data-testid="product-increase-quantity"
+                onClick={ () => handleIncrease(product.id) }
+              >
+                ➕
+              </button>
             </p>
             <img src={ product.thumbnail } alt={ product.title } />
             <h3>
