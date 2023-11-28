@@ -6,9 +6,6 @@ type Product = {
   price: number;
   thumbnail: string;
 };
-type CartProducts = Product & {
-  quantity: number;
-};
 
 function ShoppingBasket() {
   const [cart, setCart] = useState([]);
