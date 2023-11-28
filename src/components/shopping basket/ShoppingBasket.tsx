@@ -36,7 +36,7 @@ function ShoppingBasket() {
   const handleDecrease = (productId: Product) => {
     const removeItem = cart.map((item: any) => (
       item.id === productId && item.quantity > 1
-        ? { ...item, quantity: item.quantity + 1 }
+        ? { ...item, quantity: item.quantity - 1 }
         : item
     ));
     setCart(removeItem);
