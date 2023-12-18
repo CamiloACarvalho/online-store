@@ -36,6 +36,11 @@ function Home() {
   return (
     <>
       <div>
+        {search === '' && (
+          <h2 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h2>
+        )}
         <input
           data-testid="query-input"
           type="text"
@@ -45,11 +50,6 @@ function Home() {
         <button type="button" onClick={ handleClick } data-testid="query-button">
           Buscar
         </button>
-        {search === '' && (
-          <h2 data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h2>
-        )}
         {products.map((product: any) => (
           <div key={ product.id }>
             <h2 data-testid="product">{product.title}</h2>
