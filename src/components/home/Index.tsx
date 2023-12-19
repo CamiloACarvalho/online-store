@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Category from '../category/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
+import Header from '../header/Header';
 
 function Home() {
   const [search, setSearch] = useState('');
@@ -35,6 +36,7 @@ function Home() {
 
   return (
     <>
+      <Header />
       <div>
         {search === '' && (
           <h2 data-testid="home-initial-message">

@@ -1,15 +1,14 @@
 :root {
   --white: #fff;
 
-  --background: rgba(48, 48, 48, 0.63);
+  --background: #f7e4d6;
 
   --color-1: #2f8c63;
-  --color-2: #e4c0a7;
   --color-3: #1f2320;
   --color-4: #985a4c;
   --color-5: #d33432;
 
-  --soft-green:rgb(113, 255, 186)3;
+  --soft-green:rgb(113, 255, 186);
   --dark-red: #7c0000;
 
   --blue-300: #075bbb;
@@ -27,8 +26,5 @@
 }
 
 body {
-  background-image: url('/public/background.png');
-  height: 100vh;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: var(--background);
 }
