@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Category from '../category/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 import Header from '../header/Header';
+import style from './index.module.css';
 
 function Home() {
   const [search, setSearch] = useState('');
@@ -35,23 +36,34 @@ function Home() {
   };
 
   return (
-    <>
+    <div className={ style.main }>
       <Header />
       <div>
-        {search === '' && (
-          <h2 data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h2>
-        )}
-        <input
-          data-testid="query-input"
-          type="text"
-          value={ search }
-          onChange={ getValueInput }
-        />
-        <button type="button" onClick={ handleClick } data-testid="query-button">
-          Buscar
-        </button>
+        <div className={ style.search }>
+          <input
+            className={ style.input }
+            data-testid="query-input"
+            type="text"
+            value={ search }
+            onChange={ getValueInput }
+            placeholder="Insira o nome do produto"
+          />
+          <button
+            type="button"
+            onClick={ handleClick }
+            data-testid="query-button"
+            className={ style.buttonSearch }
+          >
+            Buscar
+          </button>
+          <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
+            <img
+              className={ style.shoppingCart }
+              src="../public/withoutItens.png"
+              alt="shopping cart"
+            />
+          </Link>
+        </div>
         {products.map((product: any) => (
           <div key={ product.id }>
             <h2 data-testid="product">{product.title}</h2>
@@ -80,11 +92,8 @@ function Home() {
           </div>
         ))}
       </div>
-      <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
-        <button> Ir para carrinho de compras</button>
-      </Link>
       <Category />
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.input {
+  width: 500px;
+  height: 40px;
+  border-radius: 8px;
+  border: 3px solid var(--color-7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.buttonSearch {
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  border: 3px solid var(--shadow);
+  background-color: var(--color-3);
+  color: white;
+}
+
+.shoppingCart {
+  width: 75px;
+  justify-self: end;
+}

@@ -1,20 +1,15 @@
 :root {
   --white: #fff;
 
-  --background: #f7e4d6;
+  --color-1: #b3ada6b1;
+  --color-2: #a28379;
+  --color-3: #716451;
+  --color-4: #5d4027;
+  --color-5: #282317;
+  --color-6: #ff3847;
+  --color-7: #32c0c1;
 
-  --color-1: #2f8c63;
-  --color-3: #1f2320;
-  --color-4: #985a4c;
-  --color-5: #d33432;
-
-  --soft-green:rgb(113, 255, 186);
-  --dark-red: #7c0000;
-
-  --blue-300: #075bbb;
-  --blue-500: #094493;
-
-  --shadow: #0000001a;
+  --shadow: #00000021;
 }
 
 * {
@@ -26,5 +21,9 @@
 }
 
 body {
-  background-color: var(--background);
+  height: 100vh;
+  background-image: url('../public/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
