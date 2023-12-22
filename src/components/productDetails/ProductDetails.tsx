@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProductById } from '../../services/api';
+import Header from '../header/Header';
 
 type Product = {
   id: string;
@@ -60,6 +61,7 @@ function ProductDetails() {
 
   return (
     <div>
+      <Header />
       <h1 data-testid="product-detail-name">{ product.title }</h1>
       <img
         src={ product.thumbnail }

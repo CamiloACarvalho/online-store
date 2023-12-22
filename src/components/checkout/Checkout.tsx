@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../header/Header';
 
 type Product = {
   id: string;
@@ -68,6 +69,7 @@ function Checkout() {
 
   return (
     <>
+      <Header />
       <section>
         <h1>Revise seus produtos</h1>
         {cart.map(({ title, thumbnail, price, id, quantity }) => (

@@ -56,43 +56,44 @@ function Home() {
           >
             Buscar
           </button>
-          <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
-            <img
-              className={ style.shoppingCart }
-              src="../public/withoutItens.png"
-              alt="shopping cart"
-            />
-          </Link>
         </div>
-        {products.map((product: any) => (
-          <div key={ product.id }>
-            <h2 data-testid="product">{product.title}</h2>
-            <img src={ product.thumbnail } alt={ product.title } />
-            <h3>
-              {' '}
-              R$
-              {' '}
-              {product.price.toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-              })}
-            </h3>
-            <button
-              onClick={ () => handleAddToCart(product) }
-              type="button"
-              data-testid="product-add-to-cart"
-            >
-              Adicionar ao Carrinho
-            </button>
-            <Link
-              data-testid="product-detail-link"
-              to={ `/ProductDetails/${product.id}` }
-            >
-              Detalhes do produto
-            </Link>
-          </div>
-        ))}
+        <div className={ style.containerProducts }>
+          {products.map((product: any) => (
+            <div key={ product.id }>
+              <h2 data-testid="product">{product.title}</h2>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <h3>
+                {' '}
+                R$
+                {' '}
+                {product.price.toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                })}
+              </h3>
+              <button
+                onClick={ () => handleAddToCart(product) }
+                type="button"
+                data-testid="product-add-to-cart"
+              >
+                <img
+                  className={ style.addCart }
+                  src="../public/AddCart.png"
+                  alt="shopping cart"
+                />
+              </button>
+              <Link
+                data-testid="product-detail-link"
+                to={ `/ProductDetails/${product.id}` }
+              >
+                Detalhes do produto
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
-      <Category />
+      <div className={ style.containerCategories }>
+        <Category />
+      </div>
     </div>
   );
 }

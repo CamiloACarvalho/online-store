@@ -1,22 +1,33 @@
 .header {
-  background-color: var(--color-1);
+  margin-top: 5px;
+  background-color: var(--shadow);
   width: 100%;
-  height: 150px;
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 150px;
-  display: flex;
-  justify-self: end;
-}
-
-.milo {
-  width: 220px;
   height: 100px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
+
+.title {
+  font-size: 4.5rem;
+  font-family: 'Playfair Display SC';
+  font-weight: 700;
+  color: var(--primary);
+  text-shadow: 2px 2px 2px var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto; 
+  text-align: center;
+}
+
+.icon {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

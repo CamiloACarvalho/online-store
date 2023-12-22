@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../header/Header';
 
 type Product = {
   id: string;
@@ -40,6 +41,7 @@ function ShoppingBasket() {
 
   return (
     <div>
+      <Header />
       <h1>Carrinho de Compras</h1>
       {cart.length === 0 ? (
         <div>

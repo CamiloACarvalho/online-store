@@ -8,7 +8,7 @@ import Checkout from './components/checkout/Checkout';
 function App() {
   return (
     <Routes>
-      <Route index element={ <Home /> } />
+      <Route path="/" element={ <Home /> } />
       <Route path="ShoppingBasket" element={ <ShoppingBasket /> } />
       <Route path="Checkout" element={ <Checkout /> } />
       <Route path="ProductDetails/:idApi" element={ <ProductDetails /> } />
