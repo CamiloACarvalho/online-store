@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 300px;
+  height: 600px;
+  font-family: 'Playpen Sans';
+  background-color: var(--shadow);
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  border: 3px solid var(--color-7);
+  overflow-y: auto;
+}
+
+.list {
+  font-style: oblique;
+  font-weight: bolder;
+  list-style: none;
+}
+
+.title {
+  display: flex;
+  font-size: 1.75rem;
+  font-style: italic;
+  font-weight: bold;
+}

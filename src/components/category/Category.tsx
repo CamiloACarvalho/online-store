@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import style from './category.module.css';
 import { getCategories } from '../../services/api';
 
 function Category() {
@@ -42,11 +43,12 @@ function Category() {
 
   return (
     <>
-      <section>
-        <h2> Categorias </h2>
+      <section className={ style.container }>
+        <h1 className={ style.title }> Categorias </h1>
         <ul>
           {categories.map((category:any, index) => (
             <li
+              className={ style.list }
               key={ index }
             >
               <label htmlFor={ `category${index}` }>

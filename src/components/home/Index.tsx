@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 import Category from '../category/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 import Header from '../header/Header';
@@ -55,6 +56,9 @@ function Home() {
             className={ style.buttonSearch }
           >
             Buscar
+            <SearchIcon
+              style={ { marginLeft: '15px' } }
+            />
           </button>
         </div>
         <div className={ style.containerProducts }>
