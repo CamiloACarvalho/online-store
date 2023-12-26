@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import InfoIcon from '@mui/icons-material/Info';
 import SearchIcon from '@mui/icons-material/Search';
 import Category from '../category/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
@@ -63,10 +65,22 @@ function Home() {
         </div>
         <div className={ style.containerProducts }>
           {products.map((product: any) => (
-            <div key={ product.id }>
-              <h2 data-testid="product">{product.title}</h2>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <h3>
+            <div
+              className={ style.card }
+              key={ product.id }
+            >
+              <h2
+                className={ style.description }
+                data-testid="product"
+              >
+                {product.title}
+              </h2>
+              <img
+                className={ style.image }
+                src={ product.thumbnail }
+                alt={ product.title }
+              />
+              <h3 className={ style.price }>
                 {' '}
                 R$
                 {' '}
@@ -74,30 +88,31 @@ function Home() {
                   minimumFractionDigits: 2,
                 })}
               </h3>
-              <button
-                onClick={ () => handleAddToCart(product) }
-                type="button"
-                data-testid="product-add-to-cart"
-              >
-                <img
-                  className={ style.addCart }
-                  src="../public/AddCart.png"
-                  alt="shopping cart"
-                />
-              </button>
-              <Link
-                data-testid="product-detail-link"
-                to={ `/ProductDetails/${product.id}` }
-              >
-                Detalhes do produto
-              </Link>
+              <div className={ style.btnCard }>
+                <button
+                  type="button"
+                  onClick={ () => handleAddToCart(product) }
+                  data-testid="product-add-to-cart"
+                  id="add-to-cart-button"
+                >
+                  <AddShoppingCartIcon
+                    sx={ { fontSize: 50 } }
+                  />
+                </button>
+                <button
+                  type="button"
+                  data-testid="product-detail-link"
+                >
+                  <Link to={ `/ProductDetails/${product.id}` }>
+                    <InfoIcon sx={ { fontSize: 50 } } />
+                  </Link>
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-      <div className={ style.containerCategories }>
-        <Category />
-      </div>
+      <Category />
     </div>
   );
 }

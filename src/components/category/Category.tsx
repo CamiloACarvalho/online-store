@@ -67,7 +67,7 @@ function Category() {
         </ul>
       </section>
       {findProductsByCategory.map((element: any) => (
-        <div key={ element.id }>
+        <div key={ element.id } className={ style.card }>
           <h2 data-testid="product">{element.title}</h2>
           <img src={ element.thumbnail } alt={ element.title } />
           <h3>
@@ -93,7 +93,6 @@ function Category() {
           </Link>
         </div>
       ))}
-      <section />
     </>
   );
 }
