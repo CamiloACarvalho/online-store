@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
-import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import SearchIcon from '@mui/icons-material/Search';
+import Carousel from 'react-bootstrap/Carousel';
 import Category from '../category/Category';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 import Header from '../header/Header';
 import style from './index.module.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-const slickSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-};
+import 'bootstrap/dist/css/bootstrap.css';
 
 function Home() {
   const [search, setSearch] = useState('');
@@ -74,61 +65,61 @@ function Home() {
             />
           </button>
         </div>
-        <div className={ style.carouselContainer }>
-          <Slider { ...slickSettings } className={ style.containerProducts }>
-            {products.map((product: any) => (
-              <div
-                className={ style.card }
-                key={ product.id }
+        <div
+          className={ style.containerProducts }
+        >
+          {products.map((product: any) => (
+            <div
+              className={ style.card }
+              key={ product.id }
+            >
+              <h2
+                className={ style.description }
+                data-testid="product"
               >
-                <h2
-                  className={ style.description }
-                  data-testid="product"
+                {product.title}
+              </h2>
+              <img
+                className={ style.image }
+                src={ product.thumbnail }
+                alt={ product.title }
+              />
+              <h3 className={ style.price }>
+                {' '}
+                R$
+                {' '}
+                {product.price.toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                })}
+              </h3>
+              <div className={ style.btnCard }>
+                <button
+                  type="button"
+                  onClick={ () => handleAddToCart(product) }
+                  data-testid="product-add-to-cart"
+                  id="add-to-cart-button"
+                  className={ style.btn }
                 >
-                  {product.title}
-                </h2>
-                <img
-                  className={ style.image }
-                  src={ product.thumbnail }
-                  alt={ product.title }
-                />
-                <h3 className={ style.price }>
-                  {' '}
-                  R$
-                  {' '}
-                  {product.price.toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                  })}
-                </h3>
-                <div className={ style.btnCard }>
-                  <button
-                    type="button"
-                    onClick={ () => handleAddToCart(product) }
-                    data-testid="product-add-to-cart"
-                    id="add-to-cart-button"
-                    className={ style.btn }
-                  >
-                    <AddShoppingCartIcon
+                  <AddShoppingCartIcon
+                    className={ style.icon }
+                    sx={ { fontSize: 50 } }
+                  />
+                </button>
+                <button
+                  type="button"
+                  data-testid="product-detail-link"
+                  className={ style.btn }
+                >
+                  <Link to={ `/ProductDetails/${product.id}` }>
+                    <InfoIcon
                       className={ style.icon }
                       sx={ { fontSize: 50 } }
                     />
-                  </button>
-                  <button
-                    type="button"
-                    data-testid="product-detail-link"
-                    className={ style.btn }
-                  >
-                    <Link to={ `/ProductDetails/${product.id}` }>
-                      <InfoIcon
-                        className={ style.icon }
-                        sx={ { fontSize: 50 } }
-                      />
-                    </Link>
-                  </button>
-                </div>
+                  </Link>
+                </button>
               </div>
-            ))}
-          </Slider>
+            </div>
+          ))}
         </div>
       </div>
       <Category />

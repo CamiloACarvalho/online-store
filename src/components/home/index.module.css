@@ -58,13 +58,11 @@
 }
 
 .containerProducts {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  max-height: 500px;
 }
+
 
 .card {
   display: flex;
