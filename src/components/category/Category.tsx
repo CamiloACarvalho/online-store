@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import InfoIcon from '@mui/icons-material/Info';
+import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import style from './category.module.css';
 import { getCategories } from '../../services/api';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function Category() {
   const [categories, setCategories] = useState([]);
@@ -42,7 +46,7 @@ function Category() {
   };
 
   return (
-    <>
+    <div className={ style.main }>
       <section className={ style.container }>
         <h1 className={ style.title }> Categorias </h1>
         <ul>
@@ -66,34 +70,60 @@ function Category() {
           ))}
         </ul>
       </section>
-      {findProductsByCategory.map((element: any) => (
-        <div key={ element.id } className={ style.card }>
-          <h2 data-testid="product">{element.title}</h2>
-          <img src={ element.thumbnail } alt={ element.title } />
-          <h3>
-            {' '}
-            R$
-            {' '}
-            {element.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-            })}
-          </h3>
-          <button
-            onClick={ () => handleAddToCart(element) }
-            type="button"
-            data-testid="product-add-to-cart"
-          >
-            Adicionar ao Carrinho
-          </button>
-          <Link
-            data-testid="product-detail-link"
-            to={ `/ProductDetails/${element.id}` }
-          >
-            Detalhes do produto
-          </Link>
-        </div>
-      ))}
-    </>
+      <section className={ style.section }>
+        <Carousel
+          className={ style.containerProducts }
+        >
+          {findProductsByCategory.map((element: any) => (
+            <Carousel.Item>
+              <div 
+                className={ style.card }
+                key={ element.id }
+              >
+                <h2
+                  className={ style.description }
+                  data-testid="product">{element.title}
+                </h2>
+                <img
+                  className={ style.image }
+                  src={ element.thumbnail }
+                  alt={ element.title } 
+                />
+                <h3 className={ style.price }>
+                  {' '}
+                  R$
+                  {' '}
+                  {element.price.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                  })}
+                </h3>
+                <div className={ style.btnCard }></div>
+                  <button
+                    onClick={ () => handleAddToCart(element) }
+                    type="button"
+                    data-testid="product-add-to-cart"
+                  >
+                    Adicionar ao Carrinho
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="product-detail-link"
+                    className={ style.btn }
+                  >
+                    <Link to={ `/ProductDetails/${element.id}` }>
+                      <InfoIcon
+                        className={ style.icon }
+                        sx={ { fontSize: 50 } }
+                      />
+                    </Link>
+                  </button>
+                </div>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </section>
+    </div>
   );
 }
 

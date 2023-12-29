@@ -43,86 +43,88 @@ function Home() {
   return (
     <div className={ style.main }>
       <Header />
-      <div>
-        <div className={ style.search }>
-          <input
-            className={ style.input }
-            data-testid="query-input"
-            type="text"
-            value={ search }
-            onChange={ getValueInput }
-            placeholder="Insira o nome do produto"
+      <div className={ style.search }>
+        <input
+          className={ style.input }
+          data-testid="query-input"
+          type="text"
+          value={ search }
+          onChange={ getValueInput }
+          placeholder="Insira o nome do produto"
+        />
+        <button
+          type="button"
+          onClick={ handleClick }
+          data-testid="query-button"
+          className={ style.buttonSearch }
+        >
+          Buscar
+          <SearchIcon
+            style={ { marginLeft: '15px' } }
           />
-          <button
-            type="button"
-            onClick={ handleClick }
-            data-testid="query-button"
-            className={ style.buttonSearch }
-          >
-            Buscar
-            <SearchIcon
-              style={ { marginLeft: '15px' } }
-            />
-          </button>
-        </div>
-        <div
+        </button>
+      </div>
+      <section className={ style.section }>
+        <Category />
+        <Carousel
           className={ style.containerProducts }
         >
           {products.map((product: any) => (
-            <div
-              className={ style.card }
-              key={ product.id }
-            >
-              <h2
-                className={ style.description }
-                data-testid="product"
+            <Carousel.Item>
+              <div
+                className={ style.card }
+                key={ product.id }
               >
-                {product.title}
-              </h2>
-              <img
-                className={ style.image }
-                src={ product.thumbnail }
-                alt={ product.title }
-              />
-              <h3 className={ style.price }>
-                {' '}
-                R$
-                {' '}
-                {product.price.toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                })}
-              </h3>
-              <div className={ style.btnCard }>
-                <button
-                  type="button"
-                  onClick={ () => handleAddToCart(product) }
-                  data-testid="product-add-to-cart"
-                  id="add-to-cart-button"
-                  className={ style.btn }
+                <h2
+                  className={ style.description }
+                  data-testid="product"
                 >
-                  <AddShoppingCartIcon
-                    className={ style.icon }
-                    sx={ { fontSize: 50 } }
-                  />
-                </button>
-                <button
-                  type="button"
-                  data-testid="product-detail-link"
-                  className={ style.btn }
-                >
-                  <Link to={ `/ProductDetails/${product.id}` }>
-                    <InfoIcon
+                  {product.title}
+                </h2>
+                <img
+                  className={ style.image }
+                  src={ product.thumbnail }
+                  alt={ product.title }
+                />
+                <h3 className={ style.price }>
+                  {' '}
+                  R$
+                  {' '}
+                  {product.price.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                  })}
+                </h3>
+                <div className={ style.btnCard }>
+                  <button
+                    type="button"
+                    onClick={ () => handleAddToCart(product) }
+                    data-testid="product-add-to-cart"
+                    id="add-to-cart-button"
+                    className={ style.btn }
+                  >
+                    <AddShoppingCartIcon
                       className={ style.icon }
                       sx={ { fontSize: 50 } }
                     />
-                  </Link>
-                </button>
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="product-detail-link"
+                    className={ style.btn }
+                  >
+                    <Link to={ `/ProductDetails/${product.id}` }>
+                      <InfoIcon
+                        className={ style.icon }
+                        sx={ { fontSize: 50 } }
+                      />
+                    </Link>
+                  </button>
+                </div>
               </div>
-            </div>
+            </Carousel.Item>
           ))}
-        </div>
-      </div>
-      <Category />
+        </Carousel>
+      </section>
     </div>
   );
 }

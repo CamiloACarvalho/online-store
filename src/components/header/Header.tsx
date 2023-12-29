@@ -11,17 +11,19 @@ function Header() {
       <div className={ style.icon }>
         <Link to="/">
           <StoreIcon
-            sx={ { fontSize: 50 } }
+            sx={ { fontSize: 50, color: 'white' } }
+            style={ { marginRight: '8px' } }
           />
         </Link>
         <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
           <ShoppingCartIcon
-            sx={ { fontSize: 50 } }
+            sx={ { fontSize: 50, color: 'white' } }
+            style={ { marginRight: '8px' } }
           />
         </Link>
         <Link to="/Checkout">
           <PaymentIcon
-            sx={ { fontSize: 50 } }
+            sx={ { fontSize: 50, color: 'white' } }
           />
         </Link>
       </div>

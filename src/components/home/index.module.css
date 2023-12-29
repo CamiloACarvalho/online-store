@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 20px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .input {
@@ -63,6 +64,13 @@
   max-height: 500px;
 }
 
+.section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
 
 .card {
   display: flex;
