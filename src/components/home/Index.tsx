@@ -35,6 +35,7 @@ function Home() {
   };
 
   const handleClick = async () => {
+    setProducts([]);
     const response = await getProductsFromCategoryAndQuery('', search);
     setProducts(response.results);
     setSearch('');

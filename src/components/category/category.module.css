@@ -1,7 +1,12 @@
+.main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   width: 300px;
   height: 600px;
@@ -27,4 +32,77 @@
   font-weight: bold;
   color: var(--color-7);
 }
+
+.containerProducts {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 430px;
+  height: 400px;
+  border-radius: 20px;
+  border: 3px solid var(--color-7);
+  margin: 10px;
+  background-color: var(--white);
+}
+
+.description,
+.price {
+  font-family: 'Playpen Sans';
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}
+
+.btnCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon {
+  color: var(--white);
+}
+
+.btn {
+  width: 85px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: var(--color-3);
+  border: 3px solid var(--shadow);
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: var(--color-6);
+  transition: 0.5s;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
+
+.price:hover {
+  transform: scale(1.2);
+  transition: transform 0.8s;
+}
+
 

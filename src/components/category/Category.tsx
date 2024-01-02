@@ -82,7 +82,9 @@ function Category() {
               >
                 <h2
                   className={ style.description }
-                  data-testid="product">{element.title}
+                  data-testid="product"
+                >
+                  {element.title}
                 </h2>
                 <img
                   className={ style.image }
@@ -97,13 +99,18 @@ function Category() {
                     minimumFractionDigits: 2,
                   })}
                 </h3>
-                <div className={ style.btnCard }></div>
+                <div className={ style.btnCard }>
                   <button
-                    onClick={ () => handleAddToCart(element) }
                     type="button"
+                    onClick={ () => handleAddToCart(element) }
                     data-testid="product-add-to-cart"
+                    id="add-to-cart-button"
+                    className={ style.btn }
                   >
-                    Adicionar ao Carrinho
+                    <AddShoppingCartIcon
+                      className={ style.icon }
+                      sx={ { fontSize: 50 } }
+                    />
                   </button>
                   <button
                     type="button"
