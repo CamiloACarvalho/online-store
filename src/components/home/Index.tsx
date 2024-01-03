@@ -65,8 +65,8 @@ function Home() {
           />
         </button>
       </div>
+      <Category />
       <section className={ style.section }>
-        <Category />
         <Carousel
           className={ style.containerProducts }
         >

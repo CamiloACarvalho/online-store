@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
 import { getProductById } from '../../services/api';
 import Header from '../header/Header';
+import style from './productDetails.module.css';
 
 type Product = {
   id: string;
@@ -60,27 +64,65 @@ function ProductDetails() {
   };
 
   return (
-    <div>
+    <div className={ style.main }>
       <Header />
-      <h1 data-testid="product-detail-name">{ product.title }</h1>
-      <img
-        src={ product.thumbnail }
-        alt={ product.title }
-        data-testid="product-detail-image"
-      />
-      <p data-testid="product-detail-price">
-        {product.price}
-      </p>
-      <button
-        onClick={ () => handleAddToCart(product) }
-        type="button"
-        data-testid="product-detail-add-to-cart"
-      >
-        Adicionar ao Carrinho
-      </button>
-      <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
-        Ir para carrinho de compras
-      </Link>
+      <section className={ style.section }>
+        <h1
+          className={ style.title }
+          data-testid="product-detail-name"
+        >
+          { product.title }
+        </h1>
+        <img
+          className={ style.productImage }
+          src={ product.thumbnail }
+          alt={ product.title }
+          data-testid="product-detail-image"
+        />
+        <h3 className={ style.price }>
+          {' '}
+          R$
+          {' '}
+          {product.price.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2,
+          })}
+        </h3>
+        <div className={ style.buttons }>
+          <button
+            type="button"
+            className={ style.btn }
+          >
+            <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
+              <FirstPageIcon
+                className={ style.icon }
+                sx={ { fontSize: 50 } }
+              />
+            </Link>
+          </button>
+          <button
+            onClick={ () => handleAddToCart(product) }
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            className={ style.btn }
+          >
+            <AddShoppingCartIcon
+              className={ style.icon }
+              sx={ { fontSize: 50 } }
+            />
+          </button>
+          <button
+            type="button"
+            className={ style.btn }
+          >
+            <Link data-testid="shopping-cart-button" to="/ShoppingBasket">
+              <ShoppingCartIcon
+                className={ style.icon }
+                sx={ { fontSize: 50 } }
+              />
+            </Link>
+          </button>
+        </div>
+      </section>
     </div>
   );
 }

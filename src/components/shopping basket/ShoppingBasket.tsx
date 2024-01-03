@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Header from '../header/Header';
+import style from './shoppingBasket.module.css';
 
 type Product = {
   id: string;
@@ -55,22 +58,36 @@ function ShoppingBasket() {
           {cart.map((product: any) => (
             <div key={ product.id }>
               <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
-              <p data-testid="shopping-cart-product-quantity">
+              <section
+                className={ style.section }
+                data-testid="shopping-cart-product-quantity"
+              >
                 <button
                   data-testid="product-decrease-quantity"
                   onClick={ () => handleDecrease(product.id) }
                 >
-                  ➖
+                  <RemoveCircleIcon
+                    className={ style.icon }
+                    sx={ { fontSize: 30 } }
+                  />
                 </button>
-                {product.quantity}
+                <h3 className={ style.quantity }>
+                  {product.quantity}
+                </h3>
                 <button
                   data-testid="product-increase-quantity"
                   onClick={ () => handleIncrease(product.id) }
                 >
-                  ➕
+                  <AddCircleIcon
+                    className={ style.icon }
+                    sx={ { fontSize: 30 } }
+                  />
                 </button>
-              </p>
-              <img src={ product.thumbnail } alt={ product.title } />
+              </section>
+              <img
+                src={ product.thumbnail }
+                alt={ product.title }
+              />
               <h3>
                 {' '}
                 R$

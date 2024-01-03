@@ -1,0 +1,77 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 600px;
+  border-radius: 20px;
+  border: 3px solid var(--color-7);
+  background-color: var(--white);
+  margin-top: 100px;
+}
+
+.title {
+  font-family: 'Playpen Sans';
+  font-size: 2.3rem;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  justify-content: first baseline;
+}
+
+.productImage {
+  width: 250px;
+  height: 250px;
+  margin: 20px;
+}
+
+.price {
+  font-family: 'Playpen Sans';
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.icon {
+  color: var(--white);
+}
+
+.btn {
+  width: 85px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: var(--color-3);
+  border: 3px solid var(--shadow);
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: var(--color-6);
+  transition: 0.5s;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
+
+.price:hover {
+  transform: scale(1.2);
+  transition: transform 0.8s;
+}
+
+.productImage:hover {
+  transform: scale(1.2);
+  transition: transform 0.8s;
+}
