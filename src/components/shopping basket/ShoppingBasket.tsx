@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import PaymentIcon from '@mui/icons-material/Payment';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -21,41 +23,29 @@ function ShoppingBasket() {
     const getCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCart(getCart);
 
-    if (getCart.length === 0) {
-      Swal.fire({
-        imageUrl: './public/withoutItens.png',
-        imageWidth: 200,
-        imageHeight: 200,
-        imageAlt: 'Shopping Cart Empty',
-        title: 'Oops...',
-        text: 'Seu carrinho está vazio!',
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: '<i class="fa fa-thumbs-up"> OK! </i>',
-        cancelButtonText: '<i class="fa fa-thumbs-down"> Cancelar </i>',
-          // <Link to="/">
-          //   Buscar
-          //   <SearchIcon
-          //     style={ { marginLeft: '15px' } }
-          //   />
-          // </Link>
-        // timer: 1500,
-      });
-    } else {
-      Swal.fire({
-        imageUrl: './public/haveItens.png',
-        imageWidth: 200,
-        imageHeight: 200,
-        imageAlt: 'Shopping Cart Empty',
-        title: 'Ebaaaa...',
-        text: 'Você possui itens no seu carrinho!',
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        timer: 1500,
-      });
-    }
+    // if (getCart.length === 0) {
+    //   Swal.fire({
+    //     imageUrl: './public/withoutItens.png',
+    //     imageWidth: 200,
+    //     imageHeight: 200,
+    //     imageAlt: 'Shopping Cart Empty',
+    //     title: 'Oops...',
+    //     text: 'Seu carrinho está vazio!',
+    //     showCloseButton: true,
+    //     confirmButtonText: '<i class="fa fa-thumbs-up"> OK! </i>',
+    //   });
+    // } else {
+    //   Swal.fire({
+    //     imageUrl: './public/haveItens.png',
+    //     imageWidth: 200,
+    //     imageHeight: 200,
+    //     imageAlt: 'Shopping Cart Empty',
+    //     title: 'Ebaaaa...',
+    //     text: 'Você possui itens no seu carrinho!',
+    //     showCloseButton: true,
+    //     confirmButtonText: '<i class="fa fa-thumbs-up"> OK! </i>',
+    //   });
+    // }
   }, []);
 
   const handleRemove = (productId: Product) => {
@@ -83,73 +73,108 @@ function ShoppingBasket() {
   return (
     <div>
       <Header />
-      <h1>Carrinho de Compras</h1>
-      {cart.length === 0 ? (
-        <div>
-          <Link to="/">
-            <button>Buscar produtos</button>
-          </Link>
-        </div>
-      ) : (
-        <>
-          {cart.map((product: any) => (
-            <div key={ product.id }>
-              <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
-              <section
-                className={ style.section }
-                data-testid="shopping-cart-product-quantity"
-              >
-                <button
-                  data-testid="product-decrease-quantity"
-                  onClick={ () => handleDecrease(product.id) }
-                >
-                  <RemoveCircleIcon
-                    className={ style.icon }
-                    sx={ { fontSize: 30 } }
-                  />
-                </button>
-                <h3 className={ style.quantity }>
-                  {product.quantity}
-                </h3>
-                <button
-                  data-testid="product-increase-quantity"
-                  onClick={ () => handleIncrease(product.id) }
-                >
-                  <AddCircleIcon
-                    className={ style.icon }
-                    sx={ { fontSize: 30 } }
-                  />
-                </button>
-              </section>
-              <img
-                src={ product.thumbnail }
-                alt={ product.title }
+      <div className={ style.main }>
+        {cart.length === 0 ? (
+          <div className={ style.empatySection }>
+            <h1 className={ style.titleName }>Carrinho de Compras</h1>
+            <button className={ style.buttonSearch }>
+              Buscar
+              <SearchIcon
+                style={ { fontSize: 40 } }
               />
-              <h3>
-                {' '}
-                R$
-                {' '}
-                {product.price.toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                })}
-              </h3>
-              <button
-                type="reset"
-                data-testid="remove-product"
-                onClick={ () => handleRemove(product.id) }
+            </button>
+          </div>
+        ) : (
+          <div className={ style.containerProducts }>
+            <h1 className={ style.titleName }>Carrinho de Compras</h1>
+            {cart.map((product: any) => (
+              <div
+                className={ style.product }
+                key={ product.id }
               >
-                Remover Item
-              </button>
+                <h2
+                  data-testid="shopping-cart-product-name"
+                  className={ style.title }
+                >
+                  {product.title}
+                </h2>
+                <section className={ style.secondSection }>
+                  <img
+                    className={ style.img }
+                    src={ product.thumbnail }
+                    alt={ product.title }
+                  />
+                  <h3 className={ style.price }>
+                    {' '}
+                    R$
+                    {' '}
+                    {product.price.toLocaleString('pt-BR', {
+                      minimumFractionDigits: 2,
+                    })}
+                  </h3>
+                  <section
+                    className={ style.itenNumber }
+                    data-testid="shopping-cart-product-quantity"
+                  >
+                    <button
+                      className={ style.lessBtn }
+                      data-testid="product-decrease-quantity"
+                      onClick={ () => handleDecrease(product.id) }
+                    >
+                      <RemoveCircleIcon
+                        className={ style.icon }
+                        sx={ { fontSize: 25 } }
+                      />
+                    </button>
+                    <h3 className={ style.quantity }>
+                      {product.quantity}
+                    </h3>
+                    <button
+                      className={ style.addBtn }
+                      data-testid="product-increase-quantity"
+                      onClick={ () => handleIncrease(product.id) }
+                    >
+                      <AddCircleIcon
+                        className={ style.icon }
+                        sx={ { fontSize: 25 } }
+                      />
+                    </button>
+                  </section>
+                  <button
+                    className={ style.btn }
+                    type="reset"
+                    data-testid="remove-product"
+                    onClick={ () => handleRemove(product.id) }
+                  >
+                    Remover Item
+                    <RemoveShoppingCartIcon
+                      style={ { fontSize: 30 } }
+                    />
+                  </button>
+                </section>
+              </div>
+            ))}
+            <div className={ style.btnPage }>
+              <Link to="/">
+                <button className={ style.btn }>
+                  Buscar produtos
+                  <SearchIcon
+                    style={ { fontSize: 30 } }
+                  />
+                </button>
+              </Link>
+              <Link data-testid="checkout-products" to="/checkout">
+                <button className={ style.btn }>
+                  Finalizar compra
+                  <PaymentIcon
+                    style={ { fontSize: 30 } }
+                  />
+                </button>
+              </Link>
             </div>
-          ))}
-          <Link to="/">
-            <button>Buscar produtos</button>
-          </Link>
-          <Link data-testid="checkout-products" to="/checkout">
-            <button>Checkout</button>
-          </Link>
-        </>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
