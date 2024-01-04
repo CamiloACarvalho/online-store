@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import SearchIcon from '@mui/icons-material/Search';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Header from '../header/Header';
@@ -18,6 +20,42 @@ function ShoppingBasket() {
   useEffect(() => {
     const getCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCart(getCart);
+
+    if (getCart.length === 0) {
+      Swal.fire({
+        imageUrl: './public/withoutItens.png',
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Shopping Cart Empty',
+        title: 'Oops...',
+        text: 'Seu carrinho está vazio!',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"> OK! </i>',
+        cancelButtonText: '<i class="fa fa-thumbs-down"> Cancelar </i>',
+          // <Link to="/">
+          //   Buscar
+          //   <SearchIcon
+          //     style={ { marginLeft: '15px' } }
+          //   />
+          // </Link>
+        // timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        imageUrl: './public/haveItens.png',
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Shopping Cart Empty',
+        title: 'Ebaaaa...',
+        text: 'Você possui itens no seu carrinho!',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        timer: 1500,
+      });
+    }
   }, []);
 
   const handleRemove = (productId: Product) => {
@@ -48,7 +86,6 @@ function ShoppingBasket() {
       <h1>Carrinho de Compras</h1>
       {cart.length === 0 ? (
         <div>
-          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           <Link to="/">
             <button>Buscar produtos</button>
           </Link>
