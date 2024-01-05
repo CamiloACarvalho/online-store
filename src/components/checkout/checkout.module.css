@@ -1,0 +1,62 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 550;
+  font-family: 'Playfair Display SC';
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: var(--white);
+  border-radius: 20px;
+}
+
+.containerProducts {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px;
+}
+
+.name {
+  display: block;
+  width: 400px;
+  font-family: 'Playpen Sans';
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-right: 30px;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.price, .total,
+.quantity {
+  font-family: 'Playpen Sans';
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 10px;
+}

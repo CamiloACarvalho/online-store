@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import style from './checkout.module.css';
 import Header from '../header/Header';
 
 type Product = {
@@ -25,6 +26,7 @@ type CheckoutForm = {
 
 const paymentOptions = [
   { method: 'Boleto', id: 'ticket-payment' },
+  { method: 'Pix', id: 'ticket-payment' },
   { method: 'Visa', id: 'visa-payment' },
   { method: 'MasterCard', id: 'master-payment' },
   { method: 'Elo', id: 'elo-payment' },
@@ -61,7 +63,6 @@ function Checkout() {
       setErrorVisible(true);
     } else {
       setErrorVisible(false);
-      // Limpar o carrinho ao finalizar a compra
       localStorage.removeItem('cart');
       setCart([]);
     }
@@ -70,59 +71,96 @@ function Checkout() {
   return (
     <>
       <Header />
-      <section>
-        <h1>Revise seus produtos</h1>
-        {cart.map(({ title, thumbnail, price, id, quantity }) => (
-          <div key={ id }>
-            <img src={ thumbnail } alt={ title } />
-            <span>{title}</span>
-            <span>{price}</span>
-            <span>{quantity}</span>
-          </div>
-        ))}
-      </section>
-      <form onSubmit={ handleSubmit }>
-        {Object.entries(campos).map(([fieldName, fieldValue]) => (
-          <div key={ fieldName }>
-            <label htmlFor={ fieldName }>
-              {fieldName}
-              :
-            </label>
-            <input
-              name={ fieldName }
-              type={ fieldName === 'email' ? 'email' : 'text' }
-              id={ fieldName }
-              data-testid={ `checkout-${fieldName.toLowerCase()}` }
-              value={ fieldValue }
-              onChange={ handleChange }
-            />
-          </div>
-        ))}
-        <div>
-          <h3>Método de pagamento:</h3>
-          {paymentOptions.map(({ method, id }) => (
-            <div key={ id }>
-              <input
-                type="radio"
-                id={ method.toLowerCase() }
-                name="payment"
-                data-testid={ id }
-                value={ method }
-                checked={ campos.payment === method }
-                onChange={ handleChange }
+      <main className={ style.main }>
+        <h1 className={ style.title }>Revise seus produtos</h1>
+        <section className={ style.review }>
+          {cart.map(({ title, thumbnail, price, id, quantity }) => (
+            <div
+              className={ style.containerProducts }
+              key={ id }
+            >
+              <img
+                className={ style.img }
+                src={ thumbnail }
+                alt={ title }
               />
-              <label htmlFor={ method.toLowerCase() }>{method}</label>
+              <span className={ style.name }>
+                {title}
+              </span>
+              <span className={ style.price }>
+                R$
+                {' '}
+                {price}
+              </span>
+              <span className={ style.quantity }>
+                {quantity}
+              </span>
+              <span className={ style.total }>
+                {' '}
+                R$
+                {' '}
+                { price * (quantity ?? 0) }
+              </span>
             </div>
           ))}
-        </div>
-        {errorVisible && <div data-testid="error-msg">Campos inválidos</div>}
-        <button type="submit" data-testid="checkout-btn">
-          Enviar
-        </button>
-        <Link to="/ShoppingBasket">
-          <button>Cancelar</button>
-        </Link>
-      </form>
+        </section>
+        <form
+          className={ style.form }
+          onSubmit={ handleSubmit }
+        >
+          {Object.entries(campos).map(([fieldName, fieldValue]) => (
+            <div key={ fieldName }>
+              <label htmlFor={ fieldName }>
+                {fieldName}
+                :
+              </label>
+              <input
+                name={ fieldName }
+                type={ fieldName === 'email' ? 'email' : 'text' }
+                id={ fieldName }
+                data-testid={ `checkout-${fieldName.toLowerCase()}` }
+                value={ fieldValue }
+                onChange={ handleChange }
+              />
+            </div>
+          ))}
+          <div className={ style.payment }>
+            <h3 className={ style.method }>
+              Método de pagamento:
+            </h3>
+            {paymentOptions.map(({ method, id }) => (
+              <div key={ id }>
+                <input
+                  className={ style.input }
+                  type="radio"
+                  id={ method.toLowerCase() }
+                  name="payment"
+                  data-testid={ id }
+                  value={ method }
+                  checked={ campos.payment === method }
+                  onChange={ handleChange }
+                />
+                <label htmlFor={ method.toLowerCase() }>{method}</label>
+              </div>
+            ))}
+          </div>
+          {errorVisible && <div data-testid="error-msg">Campos inválidos</div>}
+          <div className={ style.btnGroup }>
+            <button
+              className={ style.btnSend }
+              type="submit"
+              data-testid="checkout-btn"
+            >
+              Enviar
+            </button>
+            <Link to="/ShoppingBasket">
+              <button className={ style.btnCancel }>
+                Cancelar
+              </button>
+            </Link>
+          </div>
+        </form>
+      </main>
     </>
   );
 }
