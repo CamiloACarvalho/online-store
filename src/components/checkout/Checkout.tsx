@@ -87,20 +87,50 @@ function Checkout() {
               <span className={ style.name }>
                 {title}
               </span>
-              <span className={ style.price }>
-                R$
-                {' '}
-                {price}
-              </span>
-              <span className={ style.quantity }>
-                {quantity}
-              </span>
-              <span className={ style.total }>
-                {' '}
-                R$
-                {' '}
-                { price * (quantity ?? 0) }
-              </span>
+              <table className={ style.table }>
+                <thead>
+                  <tr className={ style.head }>
+                    <th className={ style.columnTitle }>Valor unitáro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className={ style.body }>
+                    <td className={ style.price }>
+                      R$
+                      {price}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table className={ style.table }>
+                <thead>
+                  <tr className={ style.head }>
+                    <th className={ style.columnTitle }>Quantidade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className={ style.body }>
+                    <td className={ style.quantity }>
+                      {quantity}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table className={ style.table }>
+                <thead>
+                  <tr className={ style.head }>
+                    <th className={ style.columnTitle }>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className={ style.body }>
+                    <td className={ style.total }>
+                      R$
+                      { price * (quantity ?? 0) }
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           ))}
         </section>
