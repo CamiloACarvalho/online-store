@@ -71,3 +71,29 @@
   font-weight: bold;
   margin: 5px;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputGroup {
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: self-start;
+  justify-content: start;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.cadastro {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display SC';
+  margin: 15px;
+}

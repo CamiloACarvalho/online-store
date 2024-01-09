@@ -15,13 +15,14 @@ type Product = {
 };
 
 type CheckoutForm = {
-  phone: string;
-  cep: string;
-  address: string;
-  payment: string;
-  fullname: string;
-  email: string;
-  cpf: string;
+  Telefone: string;
+  CEP: string;
+  Endereço: string;
+  Nome: string;
+  Sobrenome: string;
+  Email: string;
+  CPF: string;
+  Pagamento: string;
 };
 
 const paymentOptions = [
@@ -34,13 +35,14 @@ const paymentOptions = [
 
 function Checkout() {
   const [campos, setCampos] = useState<CheckoutForm>({
-    fullname: '',
-    email: '',
-    cpf: '',
-    phone: '',
-    cep: '',
-    address: '',
-    payment: '',
+    Nome: '',
+    Sobrenome: '',
+    Email: '',
+    CPF: '',
+    Telefone: '',
+    CEP: '',
+    Endereço: '',
+    Pagamento: '',
   });
 
   const [cart, setCart] = useState<Product[]>([]);
@@ -138,42 +140,63 @@ function Checkout() {
           className={ style.form }
           onSubmit={ handleSubmit }
         >
-          {Object.entries(campos).map(([fieldName, fieldValue]) => (
-            <div key={ fieldName }>
-              <label htmlFor={ fieldName }>
-                {fieldName}
-                :
-              </label>
-              <input
-                name={ fieldName }
-                type={ fieldName === 'email' ? 'email' : 'text' }
-                id={ fieldName }
-                data-testid={ `checkout-${fieldName.toLowerCase()}` }
-                value={ fieldValue }
-                onChange={ handleChange }
-              />
-            </div>
-          ))}
-          <div className={ style.payment }>
-            <h3 className={ style.method }>
-              Método de pagamento:
-            </h3>
-            {paymentOptions.map(({ method, id }) => (
-              <div key={ id }>
-                <input
-                  className={ style.input }
-                  type="radio"
-                  id={ method.toLowerCase() }
-                  name="payment"
-                  data-testid={ id }
-                  value={ method }
-                  checked={ campos.payment === method }
-                  onChange={ handleChange }
-                />
-                <label htmlFor={ method.toLowerCase() }>{method}</label>
+          <section className={ style.block1 }>
+            <h3 className={ style.cadastro }>Informações do comprador</h3>
+            {Object.entries(campos).map(([fieldName, fieldValue]) => (
+              <div
+                className={ style.inputGroup }
+                key={ fieldName }
+              >
+                <div className="input-group mb-3">
+                  <span
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    { fieldName }
+                  </span>
+                  <input
+                    className="form-control"
+                    aria-describedby="basic-addon2"
+                    name={ fieldName }
+                    type={ fieldName === 'email' ? 'email' : 'text' }
+                    id={ fieldName }
+                    data-testid={ `checkout-${fieldName.toLowerCase()}` }
+                    value={ fieldValue }
+                    onChange={ handleChange }
+                  />
+                </div>
               </div>
             ))}
-          </div>
+          </section>
+          <section className={ style.block2 }>
+            <div className={ style.payment }>
+              <h3 className={ style.method }>
+                Método de pagamento:
+              </h3>
+              {paymentOptions.map(({ method, id }) => (
+                <div key={ id }>
+                   <div className="form-check form-switch">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="flexSwitchCheckDefault"
+                      data-testid={ id }
+                      value={ method }
+                      checked={ campos.Pagamento === method }
+                      onChange={ handleChange }
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexSwitchCheckDefault"
+                    >
+                      {method}
+                    </label>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
           {errorVisible && <div data-testid="error-msg">Campos inválidos</div>}
           <div className={ style.btnGroup }>
             <button
