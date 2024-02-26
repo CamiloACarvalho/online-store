@@ -72,4 +72,4 @@ Não foram criados testes para este projeto.
 
 ## Acesse ao Projeto
 
-Para visualizar o projeto, acesse [Milo News](https://www.projeto.com).
+Para visualizar o projeto, acesse [Milo Store](https://www.projeto.com).
