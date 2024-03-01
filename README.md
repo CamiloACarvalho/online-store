@@ -4,9 +4,7 @@
 
 ## *Front-end:*
 - React
-- Redux
 - CSS3
-- Context API
 - Material UI
 - Bootstrap
 
